@@ -88,14 +88,15 @@ class ServerSeekerAPI {
 	/**
 	 * Allows you to filter servers, does NOT give you list of players.
 	 * @param {Object} filters
-	 * @param {Array<number|string>} filters.online_players - Range ([5, "inf"] for example.)
-	 * @param {number} filters.max_players - The maximum number of players.
+	 * @param {Array<number|string>} filters.online_players - The amount of online players you want. Type is a range of numbers [min, max] or a single number for exact match. max can be 'inf' to indicate no upper bound.
+	 * @param {number} filters.max_players - The max amount of players players the server should be able to hold. Type is a range of numbers [min, max] or a single number for exact match. max can be 'inf' to indicate no upper bound.
 	 * @param {boolean} filters.cracked - Whether the server is cracked (true/false).
-	 * @param {number} filters.protocol - The server protocol version.
-	 * @param {string} filters.software - The server software used.
+	 * @param {number} filters.protocol - The server protocol version. (https://wiki.vg/Protocol_version_numbers)
+	 * @param {string} filters.software - The software the server is running on. (any, vanilla, paper, spigot, bukkit).
 	 * @param {string} filters.description - The description of the server. The server description will include this string.
-	 * @param {string} filters.country_code - The country code (e.g., "DE") (CANT BE USED ALONGSIDE ASN).
-	 * @param {number} filters.asn - The ASN (CANT BE USED ALONGSIDE COUNTRY_CODE).
+	 * @param {string} filters.online_after - The server should have been online after this unix timestamp. Defaults to showing all servers which were online at last ping. Set to 0 to show all servers
+	 * @param {string} filters.country_code - The country code of the server. (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+	 * @param {number} filters.asn - The AS number of the server. (use ipinfo.io)
 	 * @returns {Array<{cracked: boolean, description: string, last_seen: number, max_players: number, online_players: number, protocol: number, server: string, version: string}>} 
 	 */
 	async servers(filters) {
@@ -133,7 +134,7 @@ class ServerSeekerAPI {
 	 * Allows you to see a servers data, and history of players.
 	 * @param {string} ip - IP Address
 	 * @param {number} port - Port (Defaults to 25565)
-	 * @returns {{cracked: boolean, description: string, last_seen: number, max_players: number, online_players: number, protocol: number, version: string, players: Array<{name: string, uuid: string, last_seen: number}>}} 
+	 * @returns {{cracked: boolean, description: string, server: string, last_seen: number, max_players: number, online_players: number, protocol: number, version: string, players: Array<{name: string, uuid: string, last_seen: number}>}} 
 	 */
 	async serverInfo(ip, port = 25565) {
 		let requestOptions = {
