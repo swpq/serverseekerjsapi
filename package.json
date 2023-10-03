@@ -1,0 +1,22 @@
+{
+  "name": "serverseekerapi",
+  "version": "1.0.3",
+  "description": "Wrapper for the ServerSeeker API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swpq/serverseekerjsapi.git"
+  },
+  "author": "swpq_",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swpq/serverseekerjsapi/issues"
+  },
+  "homepage": "https://github.com/swpq/serverseekerjsapi",
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}
