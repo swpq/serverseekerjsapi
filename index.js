@@ -20,7 +20,7 @@ class ServerSeekerAPI {
 
 	/**
 	 * Gives you information about your account (user id, username, avatar url). Also gives you information about your rate limits. Rate limits reset at midnight UTC.
-	 * @returns {{user_id: string, username: string, avatar_url: string, requests_per_day_server_info: number, requests_per_day_servers: number, requests_per_day_whereis: number, requests_made_server_info: number, requests_made_servers: number, requests_made_whereis: number}} 
+	 * @returns {Promise<{user_id: string, username: string, avatar_url: string, requests_per_day_server_info: number, requests_per_day_servers: number, requests_per_day_whereis: number, requests_made_server_info: number, requests_made_servers: number, requests_made_whereis: number}>} 
 	 */
 	async getUserInfo() {
 		const requestOptions = {
@@ -51,7 +51,7 @@ class ServerSeekerAPI {
 	 * Gives you a list of servers where a player was. Limited to 1000 results.
 	 * @param {WHEREIS_MODE} mode - WHEREIS_MODE.NAME/WHEREIS_MODE.UUID
 	 * @param {string} searchQuery - Username or UUID goes here.
-	 * @returns {Array<{server: string, uuid: string, name: string, last_seen: number}>}
+	 * @returns {Promise<Array<{server: string, uuid: string, name: string, last_seen: number}>>}
 	 */
 	async whereIs(mode, searchQuery) {
 		let requestOptions = {
@@ -97,7 +97,7 @@ class ServerSeekerAPI {
 	 * @param {string} filters.online_after - The server should have been online after this unix timestamp. Defaults to showing all servers which were online at last ping. Set to 0 to show all servers
 	 * @param {string} filters.country_code - The country code of the server. (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 	 * @param {number} filters.asn - The AS number of the server. (use ipinfo.io)
-	 * @returns {Array<{cracked: boolean, description: string, last_seen: number, max_players: number, online_players: number, protocol: number, server: string, version: string}>} 
+	 * @returns {Promise<Array<{cracked: boolean, description: string, last_seen: number, max_players: number, online_players: number, protocol: number, server: string, version: string}>>} 
 	 */
 	async servers(filters) {
 		let requestOptions = {
@@ -134,7 +134,7 @@ class ServerSeekerAPI {
 	 * Allows you to see a servers data, and history of players.
 	 * @param {string} ip - IP Address
 	 * @param {number} port - Port (Defaults to 25565)
-	 * @returns {{cracked: boolean, description: string, server: string, last_seen: number, max_players: number, online_players: number, protocol: number, version: string, players: Array<{name: string, uuid: string, last_seen: number}>}} 
+	 * @returns {Promise<{cracked: boolean, description: string, server: string, last_seen: number, max_players: number, online_players: number, protocol: number, version: string, players: Array<{name: string, uuid: string, last_seen: number}>}>} 
 	 */
 	async serverInfo(ip, port = 25565) {
 		let requestOptions = {
